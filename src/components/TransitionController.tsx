@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { ScrollTrigger } from "../lib/gsap";
+import { ScrollTrigger, registerGsapPlugins } from "../lib/gsap";
+
+// This island hydrates client:load on every page, including ones with no
+// ScrollReveal island (which is what normally triggers registration) — so
+// it must guarantee registration itself before calling ScrollTrigger.refresh().
+registerGsapPlugins();
 
 /**
  * Root-level transition orchestrator. Hydrates via `client:load` in

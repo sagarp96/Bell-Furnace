@@ -56,7 +56,14 @@ the dashboard, not by hand-creating a CNAME first — Cloudflare writes the
 DNS record itself, and a manual CNAME first is a documented cause of 522
 errors. Confirm no CAA record on your zone blocks certificate issuance.
 
-## 6. Configure rate limiting (zone-level, not code)
+## 6. Configure rate limiting (zone-level, not code) — do this before step 7
+
+The contact form has no request-volume cap in code (rate limiting is
+deliberately handled at the zone level, not in `functions/contact.ts` — see
+the plan's KTD). Until this rule is active, `/contact` is unbounded and a
+motivated actor could exhaust the Resend sending quota. Configure the rule
+in this step, **before** running through the go-live checklist below, so
+there's no window where the custom domain is live with no rate limit at all.
 
 Cloudflare dashboard → your domain's zone → **Security → WAF → Rate limiting
 rules** → create a rule scoped to the `/contact` path.

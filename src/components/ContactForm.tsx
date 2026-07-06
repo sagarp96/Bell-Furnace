@@ -12,6 +12,7 @@ declare global {
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
 const TURNSTILE_SCRIPT_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+const SUBMIT_TIMEOUT_MS = 15000;
 const TURNSTILE_SITE_KEY = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY as string | undefined;
 
 export default function ContactForm() {
@@ -55,8 +56,15 @@ export default function ContactForm() {
 		const formData = new FormData(event.currentTarget);
 		formData.set("form_rendered_at", String(renderedAt));
 
+		const controller = new AbortController();
+		const timeout = setTimeout(() => controller.abort(), SUBMIT_TIMEOUT_MS);
+
 		try {
-			const response = await fetch("/contact", { method: "POST", body: formData });
+			const response = await fetch("/contact", {
+				method: "POST",
+				body: formData,
+				signal: controller.signal,
+			});
 			const result = (await response.json()) as { ok: boolean };
 
 			if (response.ok && result.ok) {
@@ -70,6 +78,8 @@ export default function ContactForm() {
 			}
 		} catch {
 			setState("error");
+		} finally {
+			clearTimeout(timeout);
 		}
 	}
 

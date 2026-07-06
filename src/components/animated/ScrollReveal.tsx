@@ -25,13 +25,16 @@ export default function ScrollReveal({ children, parallaxDistance = 40 }: Scroll
 			// over any breakpoint-based decision.
 			mm.add(
 				{
-					reduced: "(prefers-reduced-motion: no-preference)",
+					noMotionPreference: "(prefers-reduced-motion: no-preference)",
 					mobile: "(max-width: 767px)",
 				},
 				(context) => {
-					const { reduced, mobile } = context.conditions as { reduced: boolean; mobile: boolean };
+					const { noMotionPreference, mobile } = context.conditions as {
+						noMotionPreference: boolean;
+						mobile: boolean;
+					};
 
-					if (!reduced) {
+					if (!noMotionPreference) {
 						// User prefers reduced motion: snap straight to the end-state, no animation.
 						gsap.set(containerRef.current, { opacity: 1, y: 0 });
 						return;

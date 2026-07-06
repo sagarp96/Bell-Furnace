@@ -9,11 +9,17 @@ interface Env {
 
 const MAX_LENGTHS = { name: 100, email: 254, message: 2000 } as const;
 const EMAIL_PATTERN = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
-// Reject CR/LF and other control characters — the primary defense against
-// header injection if any field is ever used in an email header/subject.
-const CONTROL_CHAR_PATTERN = /[\r\n\x00-\x08\x0b\x0c\x0e-\x1f]/;
+// Reject CR/LF and other control characters in header-adjacent fields (name,
+// email) — the primary defense against header injection, since `email` is
+// used as Resend's replyTo. `message` only ever lands in the plain-text
+// body, so it uses a separate, looser pattern below that allows the CRLF a
+// normal multi-line <textarea> submission contains.
+const HEADER_SAFE_CONTROL_CHAR_PATTERN = /[\r\n\x00-\x08\x0b\x0c\x0e-\x1f]/;
+const MESSAGE_CONTROL_CHAR_PATTERN = /[\x00-\x08\x0b\x0c\x0e-\x1f]/;
 
-type RejectionReason =
+const MIN_SUBMIT_MS = 2000;
+
+export type RejectionReason =
 	| "honeypot"
 	| "too_fast"
 	| "missing_fields"
@@ -24,65 +30,39 @@ type RejectionReason =
 	| "turnstile_invalid"
 	| "turnstile_verify_error";
 
-function logRejection(reason: RejectionReason) {
-	// No PII logged — reason code only, so Cloudflare's Functions log stream
-	// is useful for spot-checking after launch without exposing submitter data.
-	console.log(`contact-form: rejected (${reason})`);
+export interface ValidSubmission {
+	name: string;
+	email: string;
+	message: string;
+	turnstileToken: string;
 }
 
-function jsonResponse(body: Record<string, unknown>, status: number) {
-	return new Response(JSON.stringify(body), {
-		status,
-		headers: { "content-type": "application/json" },
-	});
-}
+export type ValidationResult =
+	| { ok: true; data: ValidSubmission }
+	| { ok: false; reason: RejectionReason };
 
-async function verifyTurnstile(token: string, secretKey: string, remoteIp: string): Promise<boolean> {
-	const body = new URLSearchParams({ secret: secretKey, response: token, remoteip: remoteIp });
-
-	// Fail-closed: any network error, timeout, or non-2xx response is treated
-	// as a rejection, never as a silent pass (doc-review finding).
-	try {
-		const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
-			method: "POST",
-			body,
-		});
-
-		if (!response.ok) return false;
-
-		const result = (await response.json()) as { success: boolean };
-		return result.success === true;
-	} catch {
-		return false;
-	}
-}
-
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-	const { request, env } = context;
-
-	let form: FormData;
-	try {
-		form = await request.formData();
-	} catch {
-		return jsonResponse({ ok: false, error: "Invalid form submission." }, 400);
-	}
-
+/**
+ * Pure validation/rejection logic — no network calls, no Cloudflare bindings.
+ * Kept separate from onRequestPost so it can be unit tested with a plain
+ * FormData object, no PagesFunction context or browser required.
+ */
+export function validateSubmission(form: FormData): ValidationResult {
 	// Honeypot: a field real users never see or fill; visually hidden (not
 	// display:none) on the client, but still aria-hidden/tabindex=-1 there so
 	// screen-reader users don't stumble into it either.
 	const honeypot = form.get("company_website");
 	if (typeof honeypot === "string" && honeypot.length > 0) {
-		logRejection("honeypot");
-		return jsonResponse({ ok: false, error: "Submission rejected." }, 400);
+		return { ok: false, reason: "honeypot" };
 	}
 
 	// Timing check: reject submissions completed faster than a human plausibly
 	// could. Client renders a hidden `form_rendered_at` timestamp on mount.
-	const renderedAt = Number(form.get("form_rendered_at"));
-	const MIN_SUBMIT_MS = 2000;
+	// This is a client-controlled, unsigned value — a soft anti-bot heuristic,
+	// not a security boundary; Turnstile is the actual bot gate.
+	const renderedAtField = form.get("form_rendered_at");
+	const renderedAt = typeof renderedAtField === "string" ? Number(renderedAtField) : NaN;
 	if (!Number.isFinite(renderedAt) || Date.now() - renderedAt < MIN_SUBMIT_MS) {
-		logRejection("too_fast");
-		return jsonResponse({ ok: false, error: "Submission rejected." }, 400);
+		return { ok: false, reason: "too_fast" };
 	}
 
 	const name = form.get("name");
@@ -98,8 +78,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 		email.trim() === "" ||
 		message.trim() === ""
 	) {
-		logRejection("missing_fields");
-		return jsonResponse({ ok: false, error: "Please fill in all fields." }, 400);
+		return { ok: false, reason: "missing_fields" };
 	}
 
 	if (
@@ -107,28 +86,97 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 		email.length > MAX_LENGTHS.email ||
 		message.length > MAX_LENGTHS.message
 	) {
-		logRejection("field_too_long");
-		return jsonResponse({ ok: false, error: "One or more fields is too long." }, 400);
+		return { ok: false, reason: "field_too_long" };
 	}
 
 	if (
-		CONTROL_CHAR_PATTERN.test(name) ||
-		CONTROL_CHAR_PATTERN.test(email) ||
-		CONTROL_CHAR_PATTERN.test(message)
+		HEADER_SAFE_CONTROL_CHAR_PATTERN.test(name) ||
+		HEADER_SAFE_CONTROL_CHAR_PATTERN.test(email) ||
+		MESSAGE_CONTROL_CHAR_PATTERN.test(message)
 	) {
-		logRejection("control_characters");
-		return jsonResponse({ ok: false, error: "Submission rejected." }, 400);
+		return { ok: false, reason: "control_characters" };
 	}
 
 	if (!EMAIL_PATTERN.test(email)) {
-		logRejection("invalid_email");
-		return jsonResponse({ ok: false, error: "Please enter a valid email address." }, 400);
+		return { ok: false, reason: "invalid_email" };
 	}
 
 	if (typeof turnstileToken !== "string" || turnstileToken === "") {
-		logRejection("turnstile_missing");
-		return jsonResponse({ ok: false, error: "Verification failed. Please try again." }, 400);
+		return { ok: false, reason: "turnstile_missing" };
 	}
+
+	return { ok: true, data: { name, email, message, turnstileToken } };
+}
+
+function logRejection(reason: RejectionReason) {
+	// No PII logged — reason code only, so Cloudflare's Functions log stream
+	// is useful for spot-checking after launch without exposing submitter data.
+	console.log(`contact-form: rejected (${reason})`);
+}
+
+function jsonResponse(body: Record<string, unknown>, status: number) {
+	return new Response(JSON.stringify(body), {
+		status,
+		headers: { "content-type": "application/json" },
+	});
+}
+
+const TURNSTILE_VERIFY_TIMEOUT_MS = 5000;
+
+export async function verifyTurnstile(token: string, secretKey: string, remoteIp: string): Promise<boolean> {
+	const body = new URLSearchParams({ secret: secretKey, response: token, remoteip: remoteIp });
+	const controller = new AbortController();
+	const timeout = setTimeout(() => controller.abort(), TURNSTILE_VERIFY_TIMEOUT_MS);
+
+	// Fail-closed: any network error, timeout, or non-2xx response is treated
+	// as a rejection, never as a silent pass (doc-review finding).
+	try {
+		const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+			method: "POST",
+			body,
+			signal: controller.signal,
+		});
+
+		if (!response.ok) return false;
+
+		const result = (await response.json()) as { success: boolean };
+		return result.success === true;
+	} catch {
+		return false;
+	} finally {
+		clearTimeout(timeout);
+	}
+}
+
+export const onRequestPost: PagesFunction<Env> = async (context) => {
+	const { request, env } = context;
+
+	let form: FormData;
+	try {
+		form = await request.formData();
+	} catch {
+		return jsonResponse({ ok: false, error: "Invalid form submission." }, 400);
+	}
+
+	const validation = validateSubmission(form);
+	if (!validation.ok) {
+		logRejection(validation.reason);
+		const status = 400;
+		const messages: Record<RejectionReason, string> = {
+			honeypot: "Submission rejected.",
+			too_fast: "Submission rejected.",
+			missing_fields: "Please fill in all fields.",
+			invalid_email: "Please enter a valid email address.",
+			field_too_long: "One or more fields is too long.",
+			control_characters: "Submission rejected.",
+			turnstile_missing: "Verification failed. Please try again.",
+			turnstile_invalid: "Verification failed. Please try again.",
+			turnstile_verify_error: "Verification failed. Please try again.",
+		};
+		return jsonResponse({ ok: false, error: messages[validation.reason] }, status);
+	}
+
+	const { name, email, message, turnstileToken } = validation.data;
 
 	const remoteIp = request.headers.get("CF-Connecting-IP") ?? "";
 	const turnstileOk = await verifyTurnstile(turnstileToken, env.TURNSTILE_SECRET_KEY, remoteIp);
