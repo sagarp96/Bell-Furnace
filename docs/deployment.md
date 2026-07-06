@@ -4,6 +4,23 @@ This is the one implementation unit in the plan that can't be done from the
 repo — it requires your Cloudflare account, your domain, and API keys from
 Resend and Turnstile. Follow these steps to go live.
 
+## Current status (as of 2026-07-06)
+
+- ✅ Cloudflare Pages project `bell-furnace` created, static build deployed
+  via `wrangler pages deploy dist` — live at https://bell-furnace.pages.dev
+- ✅ `bellfurnace.com` and `www.bellfurnace.com` attached to the project via
+  the Cloudflare API (zone confirmed active on the same account)
+- ⏳ **Blocked on you:** the CNAME DNS records for both domains haven't been
+  created yet. The wrangler OAuth session used to automate the steps above
+  only has `zone:read`, not DNS-write scope, so this one step needs to
+  happen through your dashboard — see step 5 below.
+- ⬜ Not done: GitHub → Cloudflare Pages git integration (the deploy above
+  was a one-off CLI upload, not continuous deployment on push — see step 3
+  if you want push-to-deploy)
+- ⬜ Not done: Resend/Turnstile accounts, keys, and Production secrets (step
+  2 and 4) — the contact form will not work until these are set
+- ⬜ Not done: the WAF rate-limiting rule (step 6)
+
 ## 1. Push the branch and open a PR
 
 ```bash
@@ -25,8 +42,13 @@ can build any branch).
 
 ## 3. Connect Cloudflare Pages
 
-Cloudflare dashboard → Workers & Pages → Create → Pages → connect this
-GitHub repo.
+**Already done, partially:** the `bell-furnace` Pages project exists and has
+one live deployment, pushed via `wrangler pages deploy dist` (a one-off CLI
+upload — not connected to git yet). **Optional follow-up:** connect it to
+this GitHub repo for continuous deployment on push — Cloudflare dashboard →
+Workers & Pages → `bell-furnace` project → Settings → Builds → connect to
+Git (this step needs GitHub OAuth authorization through the dashboard, not
+something wrangler/API can do).
 
 - **Build command:** `npm run build`
 - **Build output directory:** `dist`
@@ -51,10 +73,20 @@ values (both are gitignored).
 
 ## 5. Attach your custom domain
 
-Pages project → **Custom domains** → **Set up a domain**. Do this through
-the dashboard, not by hand-creating a CNAME first — Cloudflare writes the
-DNS record itself, and a manual CNAME first is a documented cause of 522
-errors. Confirm no CAA record on your zone blocks certificate issuance.
+**Already done via the API:** `bellfurnace.com` and `www.bellfurnace.com`
+are both registered against the `bell-furnace` Pages project (status:
+`pending`, waiting on DNS). **What's left:** the CNAME records themselves —
+go to the Cloudflare dashboard → `bellfurnace.com` zone → **DNS** → add:
+
+| Type | Name | Target | Proxy |
+|---|---|---|---|
+| CNAME | `@` (root) | `bell-furnace.pages.dev` | Proxied |
+| CNAME | `www` | `bell-furnace.pages.dev` | Proxied |
+
+Cloudflare supports CNAME flattening at the apex, so the root-domain CNAME
+is valid here. Once added, check Pages project → **Custom domains** — both
+should flip from `pending` to `active` within a few minutes as the cert
+issues. Confirm no CAA record on your zone blocks certificate issuance.
 
 ## 6. Configure rate limiting (zone-level, not code) — do this before step 7
 
