@@ -2,9 +2,57 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Home" description="Placeholder home page — content pending the design file.">
+<BaseLayout title="Bell Furnace" description="Placeholder home page — content pending the design file.">
 	<main>
-		<h1>Home</h1>
-		<p>Placeholder content — real copy and layout land once the design file is available.</p>
+		<section class="hero">
+			<h1>Bell Furnace</h1>
+			<p>Placeholder hero copy — real messaging lands once the design file is available.</p>
+			<a class="btn" href="/contact">Get in touch</a>
+		</section>
+
+		<section class="features">
+			<h2>What we do</h2>
+			<div class="features__grid">
+				<article><h3>Placeholder feature one</h3><p>Placeholder description.</p></article>
+				<article><h3>Placeholder feature two</h3><p>Placeholder description.</p></article>
+				<article><h3>Placeholder feature three</h3><p>Placeholder description.</p></article>
+			</div>
+		</section>
+
+		<section class="cta">
+			<h2>Ready to talk?</h2>
+			<a class="btn" href="/contact">Contact us</a>
+		</section>
 	</main>
 </BaseLayout>
+
+<style>
+	.hero,
+	.features,
+	.cta {
+		padding-block: var(--space-lg);
+	}
+
+	.features__grid {
+		display: grid;
+		gap: var(--space-md);
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 600px) {
+		.features__grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding-inline: var(--space-md);
+		border-radius: 4px;
+		background: var(--color-accent);
+		color: white;
+		text-decoration: none;
+	}
+</style>
