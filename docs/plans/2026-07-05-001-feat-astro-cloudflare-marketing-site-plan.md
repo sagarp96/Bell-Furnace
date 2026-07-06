@@ -1,7 +1,7 @@
 ---
 title: "feat: Scaffold Astro marketing site on Cloudflare Pages"
 type: feat
-status: active
+status: completed
 date: 2026-07-05
 deepened: 2026-07-05
 origin: docs/brainstorms/2026-07-05-website-tech-stack-requirements.md
