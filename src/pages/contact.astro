@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm";
 ---
 
 <BaseLayout title="Contact — Bell Furnace" description="Get in touch with Bell Furnace.">
 	<main>
 		<h1>Contact</h1>
-		<p>Contact form lands here in U5.</p>
+		<ContactForm client:visible />
 	</main>
 </BaseLayout>

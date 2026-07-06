@@ -75,6 +75,21 @@ input:focus-visible {
 	outline-offset: 2px;
 }
 
+/* Visually hidden but not display:none — keeps content in the accessibility
+   tree removed while remaining in the DOM (used for the contact form's
+   honeypot field, in combination with aria-hidden on the wrapper). */
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
 /* Responsive breakpoints (mobile-first; tablet/laptop are min-width overrides) */
 @media (min-width: 600px) {
 	main {

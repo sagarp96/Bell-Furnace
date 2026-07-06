@@ -17,6 +17,12 @@ pnpm-debug.log*
 .env
 .env.production
 
+# Cloudflare Pages Functions local secrets (real values never committed —
+# see .dev.vars.example for the template)
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
 # macOS-specific files
 .DS_Store
 

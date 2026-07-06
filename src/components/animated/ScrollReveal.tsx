@@ -1,6 +1,6 @@
 import { useRef, type ReactNode } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, registerGsapPlugins } from "../../lib/gsap";
+import { gsap, registerGsapPlugins } from "../../lib/gsap";
 
 registerGsapPlugins();
 
