@@ -1,0 +1,152 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const items = [
+	{
+		img: "bell-annealing-furnace-loading.jpg",
+		alt: "Bell type annealing furnace hood lowering over wire coils",
+		drg: "BFE-BAF-01",
+		num: "01 · FLAGSHIP",
+		title: "Bell Type Annealing Furnace",
+		body: "Batch annealing systems for wire rod coils and strip, ferrous and non-ferrous. Controlled-atmosphere operation under a gas-tight inner cover with high-velocity forced convection for uniform, repeatable metallurgy — bright surface finish, charge after charge.",
+		tags: ["CHARGE: ___ t*", "MAX TEMP: ___ °C*", "ELECTRIC / GAS FIRED", "HNx / N₂ ATMOSPHERE"],
+	},
+	{
+		img: "retort-lifting.jpg",
+		alt: "Corrugated retort lifted by crane",
+		drg: "BFE-RT-02",
+		num: "02",
+		title: "Retorts / Inner Covers",
+		body: "Corrugated inner covers in heat-resistant stainless steel, precision-rolled and seam-welded for gas-tight sealing. The corrugated profile maximises strength and heat transfer while resisting deformation over hundreds of thermal cycles.",
+		tags: ["SS 309 / 310 / 321*", "Ø UP TO ___ mm*", "LEAK-TESTED"],
+	},
+	{
+		img: "impeller-dynamic-balancing.jpg",
+		alt: "Impeller mounted on dynamic balancing machine",
+		drg: "BFE-IMP-03",
+		num: "03",
+		title: "Impellers & Diffusers",
+		body: "Cast and fabricated high-velocity circulation fans with matched diffuser plates — the heart of uniform heating in a bell furnace. Every impeller is dynamically balanced in-house for vibration-free running at operating temperature.",
+		tags: ["CAST + FABRICATED", "DYNAMICALLY BALANCED", "SPARES AVAILABLE"],
+	},
+	{
+		img: "heating-hood-elements.jpg",
+		alt: "Heating hood interior showing coiled heating elements",
+		drg: "BFE-HH-04",
+		num: "04",
+		title: "Heating Hoods",
+		body: "Electric or gas-fired heating hoods with ceramic-fibre insulation for low shell loss and fast cycles. Zoned element design gives precise temperature control along the full charge height.",
+		tags: ["CERAMIC FIBRE INSULATED", "MULTI-ZONE CONTROL"],
+	},
+	{
+		img: "base-assembly-dispatch.jpg",
+		alt: "Furnace base assembly on truck for dispatch",
+		drg: "BFE-BS-05",
+		num: "05",
+		title: "Base Assemblies",
+		body: "Complete furnace bases integrating the circulation drive, sand or oil sealing system, diffuser and charge support — machined, assembled and trial-run before dispatch so installation on site is fast and predictable.",
+		tags: ["DRIVE + SEALING + DIFFUSER", "PRE-ASSEMBLED & TESTED"],
+	},
+	{
+		img: "charge-carrier.jpg",
+		alt: "Fabricated charge carrier stand",
+		drg: "BFE-CC-06",
+		num: "06",
+		title: "Charge Carriers & Accessories",
+		body: "Charge carriers, perforated baskets, convector / separator plates and lifting tackle — engineered for repeated thermal cycling under full load, so your handling equipment lasts as long as your furnace.",
+		tags: ["CARRIERS · BASKETS · PLATES", "LIFTING TACKLE"],
+	},
+];
+
+const services = [
+	["Design & Engineering", "Thermal and mechanical design customised to your charge, cycle and fuel."],
+	["Erection & Commissioning", "Site installation, trial cycles and operator training until results are proven."],
+	["Automation & Control Panels", "PLC-based cycle control, recording and safety interlocks."],
+	["Spares & Retrofits", "Retorts, impellers, elements, carriers — plus upgrades for older furnaces of any make."],
+];
+
+const gallery = [
+	["impellers-row.jpg", "Row of fabricated impellers"],
+	["diffusers.jpg", "Diffuser plates ready for assembly"],
+	["inner-cover-over-wire-coils.jpg", "Inner cover lowered over wire rod coils"],
+	["dispatch-truck.jpg", "Finished furnace shell on dispatch truck"],
+];
+---
+
+<BaseLayout
+	title="Products — Bell Furnace Engineers"
+	description="Bell type annealing furnaces, retorts, impellers, heating hoods, base assemblies and charge carriers — the complete bell annealing system."
+>
+	<!-- HERO BANNER -->
+	<div style="background:#D91E26;padding:clamp(36px,5vw,64px) clamp(16px,4vw,44px);position:relative;overflow:hidden">
+		<img src="/assets/bfe-logo.png" alt="" style="position:absolute;right:-40px;top:-60px;height:300px;opacity:.12;pointer-events:none" />
+		<div style="max-width:1440px;margin:0 auto;position:relative">
+			<div style="font-size:12.5px;letter-spacing:4px;color:rgba(255,255,255,.85);font-weight:600">PRODUCTS</div>
+			<h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(30px,4.5vw,50px);color:#fff;margin:10px 0 0;text-wrap:pretty">The complete bell annealing system — and every part inside it</h1>
+		</div>
+	</div>
+
+	<!-- PRODUCT SECTIONS -->
+	<div style="max-width:1440px;margin:0 auto;padding:clamp(32px,5vw,56px) clamp(16px,4vw,44px);display:flex;flex-direction:column;gap:clamp(40px,5vw,64px)">
+		{items.map((it, i) => (
+			<div
+				data-reveal
+				style={`opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;display:flex;gap:clamp(24px,3.5vw,48px);align-items:center;${
+					i % 2 === 1
+						? "flex-wrap:wrap-reverse;flex-direction:row-reverse"
+						: "flex-wrap:wrap"
+				}`}
+			>
+				<div style="flex:1;min-width:min(300px,100%)">
+					<div style="position:relative;height:clamp(240px,28vw,380px);overflow:hidden;border:1px solid #ececec">
+						<img src={`/assets/${it.img}`} alt={it.alt} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+						<div data-bpwipe style="position:absolute;inset:0;background:#ffffff;isolation:isolate;clip-path:inset(0 0 0 0);transition:clip-path 1.2s cubic-bezier(.65,0,.35,1)">
+							<img src={`/assets/${it.img}`} alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.5) brightness(1.12);mix-blend-mode:multiply" />
+							<div style="position:absolute;inset:0;background:#D91E26;mix-blend-mode:lighten"></div>
+							<div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 1px,transparent 1px 26px)"></div>
+							<div style="position:absolute;left:10px;bottom:8px;font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:10px;letter-spacing:2px;color:#fff;background:rgba(0,0,0,.28);padding:3px 8px">DRG · {it.drg}</div>
+						</div>
+					</div>
+				</div>
+				<div style="flex:1.1;min-width:min(300px,100%)">
+					<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:14px;color:#D91E26;letter-spacing:2px">{it.num}</div>
+					<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);margin:8px 0 0">{it.title}</h2>
+					<p style="font-size:15px;line-height:1.7;color:#555;margin:14px 0 0">{it.body}</p>
+					<div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:16px">
+						{it.tags.map((tag) => (
+							<div style="font-size:12.5px;letter-spacing:1px;border:1px solid #ddd;color:#555;padding:6px 12px">{tag}</div>
+						))}
+					</div>
+				</div>
+			</div>
+		))}
+	</div>
+
+	<!-- SERVICES -->
+	<div style="background:#f8f6f3;padding:clamp(40px,6vw,64px) clamp(16px,4vw,44px)">
+		<div style="max-width:1440px;margin:0 auto">
+			<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">SERVICES</div>
+			<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);margin:8px 0 26px;color:#141419">Beyond the equipment</h2>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr));gap:18px">
+				{services.map(([t, b], i) => (
+					<div data-reveal data-delay={i * 60} style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s;background:#fff;border:1px solid #ececec;padding:22px">
+						<div style="font-weight:600;font-size:16.5px">{t}</div>
+						<div style="font-size:14px;color:#666;line-height:1.6;margin-top:6px">{b}</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<!-- GALLERY -->
+	<div style="padding:clamp(40px,6vw,64px) clamp(16px,4vw,44px);background:#fff">
+		<div style="max-width:1440px;margin:0 auto">
+			<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">FROM OUR WORKS</div>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:14px;margin-top:20px">
+				{gallery.map(([img, alt], i) => (
+					<img data-reveal data-delay={i * 60} src={`/assets/${img}`} alt={alt} style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s;width:100%;height:220px;object-fit:cover;display:block" />
+				))}
+			</div>
+		</div>
+	</div>
+</BaseLayout>

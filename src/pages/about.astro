@@ -1,10 +1,93 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const pillars = [
+	["Mission", "To equip every wire & strip producer with heating equipment that delivers consistent metallurgy, lower energy cost and years of uninterrupted service."],
+	["Vision", "To be India's most trusted name in bell annealing — the standard others are measured against — while building furnaces that support a sustainable future."],
+	["Quality", "ISO 9001:2015 certified processes — from raw material inspection to dynamic balancing and pre-dispatch trials — on every single build."],
+];
+
+const milestones = [
+	["1987", "Industrial Engineers founded", "Our sister concern begins designing and commissioning industrial furnaces."],
+	["19XX*", "Milestone placeholder", "Add a key achievement here — first export, 100th furnace, major client win."],
+	["2024", "Bell Furnace Engineers born", "BFE is incorporated to focus on bell type annealing furnaces for wire & strip."],
+	["Today", "ISO 9001:2015 certified", "Serving wire, strip, automotive, aerospace and steel industries across India."],
+];
 ---
 
-<BaseLayout title="About — Bell Furnace" description="Placeholder about page — content pending the design file.">
-	<main>
-		<h1>About</h1>
-		<p>Placeholder content — real copy lands once the design file is available.</p>
-	</main>
+<BaseLayout
+	title="About — Bell Furnace Engineers"
+	description="An ISO 9001:2015 certified furnace maker born of a 39-year lineage through Industrial Engineers (est. 1987)."
+>
+	<!-- HERO BANNER -->
+	<div style="background:#D91E26;padding:clamp(36px,5vw,64px) clamp(16px,4vw,44px);position:relative;overflow:hidden">
+		<img src="/assets/bfe-logo.png" alt="" style="position:absolute;right:-40px;top:-60px;height:300px;opacity:.12;pointer-events:none" />
+		<div style="max-width:1440px;margin:0 auto;position:relative">
+			<div style="font-size:12.5px;letter-spacing:4px;color:rgba(255,255,255,.85);font-weight:600">ABOUT US</div>
+			<h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(30px,4.5vw,50px);color:#fff;margin:10px 0 0;text-wrap:pretty">Bell — The Name Behind the Flame</h1>
+		</div>
+	</div>
+
+	<!-- STORY -->
+	<div style="padding:clamp(40px,6vw,72px) clamp(16px,4vw,44px);background:#fff">
+		<div style="display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,56px);max-width:1440px;margin:0 auto;align-items:center">
+			<div style="flex:1.1;min-width:min(320px,100%)">
+				<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">OUR STORY</div>
+				<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);margin:8px 0 0;color:#141419">An ISO 9001:2015 certified furnace maker, born of a 39-year lineage</h2>
+				<p style="font-size:15.5px;line-height:1.75;color:#555;margin:18px 0 0;text-wrap:pretty">We, Bell Furnace Engineers, take pride in being an ISO 9001:2015 certified leading manufacturer of high-quality furnaces for wire &amp; strip industry applications, for ferrous and non-ferrous metals. Through our sister concern, <strong>Industrial Engineers</strong> — with more than 39 years of experience in design, supply, erection and commissioning of industrial furnaces and related accessories — we have established ourselves as a trusted name in the wire &amp; strip industry, delivering reliable and efficient heating solutions.</p>
+				<p style="font-size:15.5px;line-height:1.75;color:#555;margin:14px 0 0;text-wrap:pretty">BFE is committed to delivering cutting-edge solutions that give our clients a competitive advantage and create value for their business. We strive to provide furnaces and heating solutions that not only optimise operations but also contribute to a sustainable future — continuously pushing the boundaries of furnace technology, leading to customer satisfaction and excellence in quality.</p>
+			</div>
+			<div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;flex:.9;min-width:min(300px,100%)">
+				<img src="/assets/retort-fabrication.jpg" alt="Large corrugated retort under fabrication at BFE works" style="width:100%;height:clamp(280px,32vw,440px);object-fit:cover;display:block;border:1px solid #ececec" />
+				<div style="font-size:12.5px;color:#9a9a9a;margin-top:8px;letter-spacing:.5px">Corrugated retort under fabrication — Mundka Works, New Delhi</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- MISSION / VISION / QUALITY -->
+	<div style="background:#f8f6f3;padding:clamp(40px,6vw,64px) clamp(16px,4vw,44px)">
+		<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:22px;max-width:1440px;margin:0 auto">
+			{pillars.map(([t, b], i) => (
+				<div data-reveal data-delay={i * 80} style="opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;background:#fff;border-top:3px solid #D91E26;padding:26px">
+					<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:20px;color:#D91E26">{t}</div>
+					<div style="font-size:14.5px;line-height:1.7;color:#555;margin-top:10px">{b}</div>
+				</div>
+			))}
+		</div>
+	</div>
+
+	<!-- TIMELINE -->
+	<div style="padding:clamp(40px,6vw,72px) clamp(16px,4vw,44px);background:#fff">
+		<div style="max-width:1440px;margin:0 auto">
+			<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">MILESTONES</div>
+			<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(24px,3.2vw,36px);margin:8px 0 30px;color:#141419">Four decades in heat</h2>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:22px">
+				{milestones.map(([y, t, b], i) => (
+					<div data-reveal data-delay={i * 80} style="opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;border-left:3px solid #D91E26;padding:4px 0 4px 18px">
+						<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:26px;color:#D91E26">{y}</div>
+						<div style="font-weight:600;font-size:16px;margin-top:4px">{t}</div>
+						<div style="font-size:14px;color:#666;line-height:1.6;margin-top:4px">{b}</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<!-- UNITS -->
+	<div style="background:#0c0c0c;padding:clamp(40px,6vw,64px) clamp(16px,4vw,44px);position:relative;overflow:hidden">
+		<img src="/assets/bfe-logo.png" alt="" style="position:absolute;right:-50px;bottom:-90px;height:320px;opacity:.07;pointer-events:none" />
+		<div style="max-width:1440px;margin:0 auto;position:relative">
+			<div style="font-size:12.5px;letter-spacing:4px;color:#FF3B42;font-weight:600">OUR UNITS</div>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:22px;margin-top:22px">
+				<div style="border:1px solid #2c2c2c;padding:26px">
+					<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;color:#fff">Registered Office</div>
+					<div style="font-size:14.5px;line-height:1.7;color:#aaa;margin-top:10px">89 Third Floor, D1 Block, Lal Sai Marg,<br />Janakpuri, New Delhi — 110058</div>
+				</div>
+				<div style="border:1px solid #2c2c2c;padding:26px">
+					<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;color:#fff">Works</div>
+					<div style="font-size:14.5px;line-height:1.7;color:#aaa;margin-top:10px">Khasra No. 56/6, Mundka Industrial Area,<br />New Delhi — 110041</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </BaseLayout>

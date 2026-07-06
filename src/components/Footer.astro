@@ -2,15 +2,41 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
-	<p>&copy; {year} Bell Furnace. All rights reserved.</p>
+<footer style="background:#0c0c0c;padding:clamp(36px,5vw,56px) clamp(16px,4vw,44px) 28px;position:relative;overflow:hidden">
+	<img src="/assets/bfe-logo.png" alt="" style="position:absolute;right:clamp(10px,4vw,60px);top:-40px;height:280px;opacity:.06;pointer-events:none" />
+	<div style="max-width:1440px;margin:0 auto;position:relative">
+		<div style="display:flex;flex-wrap:wrap;gap:clamp(28px,5vw,72px)">
+			<div style="flex:1.4;min-width:min(280px,100%)">
+				<div style="display:flex;align-items:center;gap:12px">
+					<img src="/assets/bfe-logo.png" alt="BFE logo" style="height:46px" />
+					<div>
+						<div style="font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:19px;color:#fff">BELL FURNACE ENGINEERS</div>
+						<div style="font-size:11px;letter-spacing:2.5px;color:#888">BELL — THE NAME BEHIND THE FLAME</div>
+					</div>
+				</div>
+				<p style="font-size:14px;line-height:1.7;color:#999;margin:16px 0 0;max-width:420px">ISO 9001:2015 certified manufacturer of bell type annealing furnaces, retorts, impellers, base assemblies and charge carriers for the wire &amp; strip industry.</p>
+			</div>
+			<div style="flex:1;min-width:150px">
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:13px;letter-spacing:2px;color:#FF3B42">SITE</div>
+				<div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;font-size:14.5px;color:#ccc">
+					<a class="footer-link" href="/" style="color:#ccc;text-decoration:none">Home</a>
+					<a class="footer-link" href="/about" style="color:#ccc;text-decoration:none">About Us</a>
+					<a class="footer-link" href="/products" style="color:#ccc;text-decoration:none">Products</a>
+					<a class="footer-link" href="/contact" style="color:#ccc;text-decoration:none">Contact</a>
+				</div>
+			</div>
+			<div style="flex:1.4;min-width:min(260px,100%)">
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:13px;letter-spacing:2px;color:#FF3B42">REACH US</div>
+				<div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;font-size:14.5px;color:#ccc">
+					<a class="footer-link" href="tel:+919810630056" style="color:#ccc;text-decoration:none">+91 98106 30056 · +91 97735 68856</a>
+					<a class="footer-link" href="mailto:bellfurnaces@gmail.com" style="color:#ccc;text-decoration:none">bellfurnaces@gmail.com</a>
+					<div style="color:#888;font-size:13.5px;line-height:1.6">Works: Khasra No. 56/6, Mundka Industrial Area, New Delhi — 110041</div>
+				</div>
+			</div>
+		</div>
+		<div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;border-top:1px solid #232323;margin-top:32px;padding-top:18px;font-size:12.5px;color:#777">
+			<div>© {year} Bell Furnace Engineers · bellfurnace.com</div>
+			<div>Sister concern: Industrial Engineers, est. 1987</div>
+		</div>
+	</div>
 </footer>
-
-<style>
-	.site-footer {
-		padding: var(--space-md);
-		border-top: 1px solid var(--color-border);
-		text-align: center;
-		font-size: 0.875rem;
-	}
-</style>

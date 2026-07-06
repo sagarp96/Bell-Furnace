@@ -1,65 +1,284 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ScrollReveal from "../components/animated/ScrollReveal";
+
+const products = [
+	{ img: "bell-annealing-furnace-loading.jpg", drg: "BFE-01", title: "Bell Type Annealing Furnace", body: "Flagship batch annealing systems for wire coils & strip — uniform results, charge after charge.", alt: "Bell type annealing furnace being loaded over wire coils" },
+	{ img: "retort-lifting.jpg", drg: "BFE-02", title: "Retorts / Inner Covers", body: "Corrugated heat-resistant inner covers for gas-tight, controlled-atmosphere annealing.", alt: "Corrugated retort being lifted by crane" },
+	{ img: "impeller-twin.jpg", drg: "BFE-03", title: "Impellers & Diffusers", body: "Cast & fabricated circulation fans, dynamically balanced for high-velocity uniform heating.", alt: "Fabricated high-velocity impeller" },
+	{ img: "heating-hood.jpg", drg: "BFE-04", title: "Heating Hoods", body: "Insulated electric / gas-fired hoods engineered for low heat loss and long element life.", alt: "Insulated heating hood with wiring panels" },
+	{ img: "base-assembly-dispatch.jpg", drg: "BFE-05", title: "Base Assemblies", body: "Complete furnace bases with drive, sealing and diffuser systems, ready for installation.", alt: "Furnace base assembly loaded for dispatch" },
+	{ img: "charge-baskets.jpg", drg: "BFE-06", title: "Charge Carriers", body: "Baskets, convector plates and lifting tackle built to survive repeated thermal cycling.", alt: "Perforated charge carrier baskets" },
+];
+
+const why = [
+	["01", "Design to commissioning, one partner", "Thermal design, fabrication, erection and commissioning — accountable end to end."],
+	["02", "Precision-balanced rotating parts", "Every impeller is dynamically balanced in-house for vibration-free, uniform circulation."],
+	["03", "A 39-year furnace lineage", "Built on the experience of Industrial Engineers (est. 1987) — hundreds of heat-processing installations across India."],
+	["04", "Ferrous & non-ferrous expertise", "Bright annealing of steel wire, copper, aluminium strip and more — with controlled atmosphere."],
+];
+
+const industries = ["WIRE & CABLE", "STRIP & SHEET", "AUTOMOTIVE", "AEROSPACE", "STEEL & STAINLESS", "COPPER & ALUMINIUM"];
+
+const process = [
+	["01", "Requirement & Thermal Design", "Charge weight, material, cycle and atmosphere — engineered into a custom furnace design."],
+	["02", "In-house Manufacture", "Hoods, retorts, bases, impellers and carriers fabricated at our Mundka works, New Delhi."],
+	["03", "Erection & Commissioning", "Site installation, trials and handover with proven cycle results at your plant."],
+	["04", "Spares & Lifetime Support", "Retorts, impellers, elements and carriers as spares — plus retrofits for older furnaces."],
+];
 ---
 
-<BaseLayout title="Bell Furnace" description="Placeholder home page — content pending the design file.">
-	<main>
-		<section class="hero">
-			<h1>Bell Furnace</h1>
-			<p>Placeholder hero copy — real messaging lands once the design file is available.</p>
-			<a class="btn" href="/contact">Get in touch</a>
-		</section>
-
-		<section class="features">
-			<h2>What we do</h2>
-			<div class="features__grid">
-				<ScrollReveal client:visible>
-					<article><h3>Placeholder feature one</h3><p>Placeholder description.</p></article>
-				</ScrollReveal>
-				<ScrollReveal client:visible>
-					<article><h3>Placeholder feature two</h3><p>Placeholder description.</p></article>
-				</ScrollReveal>
-				<ScrollReveal client:visible>
-					<article><h3>Placeholder feature three</h3><p>Placeholder description.</p></article>
-				</ScrollReveal>
+<BaseLayout
+	title="Bell Furnace Engineers — Bell Type Annealing Furnaces"
+	description="ISO 9001:2015 certified manufacturer of bell type annealing furnaces, retorts, impellers, base assemblies and charge carriers for the wire & strip industry."
+>
+	<!-- HERO -->
+	<div style="position:relative;overflow:hidden;background:#ffffff">
+		<div style="display:flex;flex-wrap:wrap;gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(32px,5vw,72px) clamp(16px,4vw,44px) clamp(28px,4vw,56px);max-width:1440px;margin:0 auto">
+			<div style="flex:1.05;min-width:min(320px,100%)">
+				<div style="display:inline-flex;align-items:center;gap:10px;border:1px solid #D91E26;color:#D91E26;font-size:clamp(10px,1.3vw,12.5px);letter-spacing:3px;font-weight:600;padding:7px 14px;margin-bottom:22px">
+					<span style="width:8px;height:8px;background:#D91E26;border-radius:50%"></span>
+					ISO 9001:2015 CERTIFIED MANUFACTURER
+				</div>
+				<h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(32px,5vw,58px);line-height:1.06;margin:0;color:#141419;text-wrap:pretty">Bell Type Annealing Furnaces,<br /><span style="color:#D91E26;font-style:italic">Built for Consistent Results.</span></h1>
+				<p style="font-size:clamp(15px,1.6vw,17.5px);line-height:1.7;color:#555;margin:20px 0 0;max-width:540px;text-wrap:pretty">Design, manufacture, erection &amp; commissioning of bell annealing furnaces and heat-processing equipment for the wire &amp; strip industry — ferrous and non-ferrous. Backed by a 39-year legacy through our sister concern, Industrial Engineers.</p>
+				<div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:30px">
+					<a class="btn-red" href="/products" style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;background:#D91E26;color:#fff;padding:15px 30px;letter-spacing:1.5px;cursor:pointer;text-decoration:none">EXPLORE PRODUCTS</a>
+					<a class="btn-outline-dark" href="/contact" style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;border:2px solid #141419;color:#141419;padding:13px 30px;letter-spacing:1.5px;cursor:pointer;text-decoration:none">GET A QUOTE</a>
+				</div>
 			</div>
-		</section>
 
-		<section class="cta">
-			<h2>Ready to talk?</h2>
-			<a class="btn" href="/contact">Contact us</a>
-		</section>
-	</main>
+			<!-- BLUEPRINT -->
+			<div style="flex:.95;min-width:min(320px,100%);display:flex;flex-direction:column;gap:8px">
+				<svg id="bp-svg" viewBox="0 0 680 700" style="width:100%;height:auto;display:block" aria-label="Animated cutaway blueprint of a bell type annealing furnace">
+					<defs>
+						<pattern id="bp-grid" width="34" height="34" patternUnits="userSpaceOnUse">
+							<path d="M34 0H0V34" fill="none" stroke="rgba(217,30,38,.09)" stroke-width="1"></path>
+						</pattern>
+					</defs>
+					<rect x="1" y="1" width="678" height="698" fill="url(#bp-grid)" stroke="#D91E26" stroke-width="2"></rect>
+					<rect x="9" y="9" width="662" height="682" fill="none" stroke="rgba(217,30,38,.35)" stroke-width="1"></rect>
+
+					<g class="bp-label" style="opacity:0">
+						<line x1="140" y1="70" x2="500" y2="70" stroke="#D91E26" stroke-width="1"></line>
+						<path d="M140 70l10 -4v8z M500 70l-10 -4v8z" fill="#D91E26"></path>
+						<line x1="140" y1="62" x2="140" y2="150" stroke="rgba(217,30,38,.5)" stroke-width="1" stroke-dasharray="4 4"></line>
+						<line x1="500" y1="62" x2="500" y2="150" stroke="rgba(217,30,38,.5)" stroke-width="1" stroke-dasharray="4 4"></line>
+						<text x="320" y="58" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-size="14" font-weight="600" fill="#D91E26" letter-spacing="2">Ø XXXX*</text>
+					</g>
+
+					<g id="bp-hood">
+						<path class="bp-draw" d="M140 560 V210 Q140 120 230 120 H410 Q500 120 500 210 V560" fill="none" stroke="#D91E26" stroke-width="3"></path>
+						<line x1="128" y1="560" x2="512" y2="560" stroke="#D91E26" stroke-width="3"></line>
+						<line x1="140" y1="260" x2="500" y2="260" stroke="rgba(217,30,38,.45)" stroke-width="1.5"></line>
+						<line x1="140" y1="360" x2="500" y2="360" stroke="rgba(217,30,38,.45)" stroke-width="1.5"></line>
+						<line x1="140" y1="460" x2="500" y2="460" stroke="rgba(217,30,38,.45)" stroke-width="1.5"></line>
+						<path class="bp-draw" d="M305 120 v-26 h30 v26" fill="none" stroke="#D91E26" stroke-width="2.5"></path>
+						<path class="bp-draw" d="M158 240 l14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12" fill="none" stroke="#D91E26" stroke-width="1.6"></path>
+						<path class="bp-draw" d="M522 240 l-14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12" fill="none" stroke="#D91E26" stroke-width="1.6" transform="translate(-36 0)"></path>
+					</g>
+
+					<g>
+						<path class="bp-draw" d="M175 560 V235 Q175 175 245 175 H395 Q465 175 465 235 V560" fill="none" stroke="#D91E26" stroke-width="2" stroke-dasharray="9 6"></path>
+						<g stroke="rgba(217,30,38,.55)" stroke-width="1">
+							<line x1="169" y1="270" x2="181" y2="270"></line><line x1="169" y1="300" x2="181" y2="300"></line><line x1="169" y1="330" x2="181" y2="330"></line><line x1="169" y1="360" x2="181" y2="360"></line><line x1="169" y1="390" x2="181" y2="390"></line><line x1="169" y1="420" x2="181" y2="420"></line><line x1="169" y1="450" x2="181" y2="450"></line><line x1="169" y1="480" x2="181" y2="480"></line><line x1="169" y1="510" x2="181" y2="510"></line>
+							<line x1="459" y1="270" x2="471" y2="270"></line><line x1="459" y1="300" x2="471" y2="300"></line><line x1="459" y1="330" x2="471" y2="330"></line><line x1="459" y1="360" x2="471" y2="360"></line><line x1="459" y1="390" x2="471" y2="390"></line><line x1="459" y1="420" x2="471" y2="420"></line><line x1="459" y1="450" x2="471" y2="450"></line><line x1="459" y1="480" x2="471" y2="480"></line><line x1="459" y1="510" x2="471" y2="510"></line>
+						</g>
+					</g>
+
+					<g id="bp-heat">
+						<path class="bp-wave" d="M240 320 q8 -14 0 -28 q-8 -14 0 -28 q8 -14 0 -28" fill="none" stroke="#D91E26" stroke-width="2" style="opacity:0"></path>
+						<path class="bp-wave" d="M320 330 q8 -14 0 -28 q-8 -14 0 -28 q8 -14 0 -28" fill="none" stroke="#D91E26" stroke-width="2" style="opacity:0"></path>
+						<path class="bp-wave" d="M400 320 q8 -14 0 -28 q-8 -14 0 -28 q8 -14 0 -28" fill="none" stroke="#D91E26" stroke-width="2" style="opacity:0"></path>
+					</g>
+
+					<g>
+						<g class="bp-draw-g">
+							<rect x="215" y="350" width="210" height="62" fill="none" stroke="#D91E26" stroke-width="2"></rect>
+							<line x1="215" y1="362" x2="425" y2="362" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="374" x2="425" y2="374" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="386" x2="425" y2="386" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="398" x2="425" y2="398" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
+						</g>
+						<g class="bp-draw-g">
+							<rect x="215" y="418" width="210" height="62" fill="none" stroke="#D91E26" stroke-width="2"></rect>
+							<line x1="215" y1="430" x2="425" y2="430" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="442" x2="425" y2="442" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="454" x2="425" y2="454" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="466" x2="425" y2="466" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
+						</g>
+						<g class="bp-draw-g">
+							<rect x="215" y="486" width="210" height="62" fill="none" stroke="#D91E26" stroke-width="2"></rect>
+							<line x1="215" y1="498" x2="425" y2="498" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="510" x2="425" y2="510" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="522" x2="425" y2="522" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="534" x2="425" y2="534" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
+						</g>
+					</g>
+
+					<g>
+						<rect class="bp-draw" x="150" y="566" width="340" height="20" fill="none" stroke="#D91E26" stroke-width="2.5"></rect>
+						<line x1="150" y1="576" x2="490" y2="576" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
+						<rect x="176" y="586" width="16" height="66" fill="none" stroke="#D91E26" stroke-width="2"></rect>
+						<rect x="448" y="586" width="16" height="66" fill="none" stroke="#D91E26" stroke-width="2"></rect>
+						<line x1="150" y1="656" x2="490" y2="656" stroke="#D91E26" stroke-width="2.5"></line>
+					</g>
+
+					<g id="bp-impeller">
+						<circle cx="320" cy="620" r="30" fill="none" stroke="#D91E26" stroke-width="2"></circle>
+						<circle cx="320" cy="620" r="5" fill="#D91E26"></circle>
+						<path d="M320 620 L320 592 M320 620 L344 606 M320 620 L344 634 M320 620 L320 648 M320 620 L296 634 M320 620 L296 606" stroke="#D91E26" stroke-width="2.5" fill="none"></path>
+					</g>
+
+					<g font-family="Chakra Petch,sans-serif" font-size="12" font-weight="600" fill="#D91E26">
+						<g class="bp-label" style="opacity:0">
+							<line x1="500" y1="200" x2="586" y2="182" stroke="#D91E26" stroke-width="1"></line><circle cx="500" cy="200" r="3" fill="#D91E26"></circle>
+							<text x="590" y="180" letter-spacing="1">HEATING</text><text x="590" y="194" letter-spacing="1">HOOD</text>
+						</g>
+						<g class="bp-label" style="opacity:0">
+							<line x1="465" y1="320" x2="586" y2="308" stroke="#D91E26" stroke-width="1"></line><circle cx="465" cy="320" r="3" fill="#D91E26"></circle>
+							<text x="590" y="304" letter-spacing="1">INNER COVER</text><text x="590" y="318" letter-spacing="1">· RETORT</text>
+						</g>
+						<g class="bp-label" style="opacity:0">
+							<line x1="425" y1="450" x2="586" y2="446" stroke="#D91E26" stroke-width="1"></line><circle cx="425" cy="450" r="3" fill="#D91E26"></circle>
+							<text x="590" y="442" letter-spacing="1">WIRE ROD</text><text x="590" y="456" letter-spacing="1">COILS</text>
+						</g>
+						<g class="bp-label" style="opacity:0">
+							<line x1="172" y1="290" x2="92" y2="272" stroke="#D91E26" stroke-width="1"></line><circle cx="172" cy="290" r="3" fill="#D91E26"></circle>
+							<text x="88" y="258" text-anchor="end" letter-spacing="1">HEATING</text><text x="88" y="272" text-anchor="end" letter-spacing="1">ELEMENTS</text>
+						</g>
+						<g class="bp-label" style="opacity:0">
+							<line x1="150" y1="576" x2="92" y2="576" stroke="#D91E26" stroke-width="1"></line><circle cx="150" cy="576" r="3" fill="#D91E26"></circle>
+							<text x="88" y="566" text-anchor="end" letter-spacing="1">BASE</text><text x="88" y="580" text-anchor="end" letter-spacing="1">ASSEMBLY</text>
+						</g>
+						<g class="bp-label" style="opacity:0">
+							<line x1="352" y1="628" x2="586" y2="628" stroke="#D91E26" stroke-width="1"></line><circle cx="352" cy="628" r="3" fill="#D91E26"></circle>
+							<text x="590" y="624" letter-spacing="1">HIGH-VELOCITY</text><text x="590" y="638" letter-spacing="1">IMPELLER</text>
+						</g>
+					</g>
+
+					<g class="bp-label" style="opacity:0" font-family="Chakra Petch,sans-serif" fill="#D91E26">
+						<rect x="20" y="636" width="252" height="52" fill="#ffffff" stroke="#D91E26" stroke-width="1.5"></rect>
+						<line x1="20" y1="653" x2="272" y2="653" stroke="#D91E26" stroke-width="1"></line>
+						<line x1="20" y1="670" x2="272" y2="670" stroke="#D91E26" stroke-width="1"></line>
+						<text x="28" y="649" font-size="10" font-weight="600" letter-spacing="1.5">BELL FURNACE ENGINEERS · NEW DELHI</text>
+						<text x="28" y="666" font-size="9.5" letter-spacing="1.5">DRG NO. BFE-BAF-01 · BELL TYPE ANNEALING FURNACE</text>
+						<text x="28" y="683" font-size="9.5" letter-spacing="1.5">SCALE 1:25 · REV A · SHEET 01 OF 01</text>
+					</g>
+				</svg>
+				<div style="font-size:11.5px;color:#9a9a9a;letter-spacing:.5px">*Indicative section — dimensions customised to each charge weight &amp; coil size.</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- STATS -->
+	<div style="background:#0c0c0c;position:relative;overflow:hidden">
+		<img src="/assets/bfe-logo.png" alt="" style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);height:220%;opacity:.06;pointer-events:none" />
+		<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:28px;padding:clamp(28px,4vw,44px) clamp(16px,4vw,44px);max-width:1440px;margin:0 auto;position:relative">
+			<div data-reveal style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s">
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#FF3B42"><span data-count="39" data-suffix="+">39+</span></div>
+				<div style="font-size:12.5px;letter-spacing:2px;color:#bbb;margin-top:4px">YEARS OF COMBINED LEGACY</div>
+			</div>
+			<div data-reveal data-delay="80" style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s">
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#FF3B42"><span data-count="1987">1987</span></div>
+				<div style="font-size:12.5px;letter-spacing:2px;color:#bbb;margin-top:4px">INDUSTRIAL ENGINEERS EST.</div>
+			</div>
+			<div data-reveal data-delay="160" style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s">
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#FF3B42"><span data-count="2" data-suffix="">2</span> UNITS</div>
+				<div style="font-size:12.5px;letter-spacing:2px;color:#bbb;margin-top:4px">OFFICE + WORKS, DELHI NCR</div>
+			</div>
+			<div data-reveal data-delay="240" style="opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s">
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(28px,3.4vw,38px);color:#FF3B42">ISO 9001</div>
+				<div style="font-size:12.5px;letter-spacing:2px;color:#bbb;margin-top:4px">2015 CERTIFIED QUALITY</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- PRODUCTS GRID -->
+	<div style="background:#f8f6f3;padding:clamp(40px,6vw,72px) clamp(16px,4vw,44px)">
+		<div style="max-width:1440px;margin:0 auto">
+			<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:34px">
+				<div>
+					<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">WHAT WE BUILD</div>
+					<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);margin:8px 0 0;color:#141419">The Complete Bell Furnace System</h2>
+				</div>
+				<a class="link-red" href="/products" style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:14px;color:#D91E26;letter-spacing:1.5px;cursor:pointer;border-bottom:2px solid #D91E26;padding-bottom:3px;text-decoration:none">ALL PRODUCTS →</a>
+			</div>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:22px">
+				{products.map((p, i) => (
+					<a class="product-card" href="/products" data-reveal data-delay={(i % 3) * 80} style="opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;background:#fff;border:1px solid #ececec;cursor:pointer;text-decoration:none;color:inherit;display:block">
+						<div style="position:relative;height:210px;overflow:hidden">
+							<img src={`/assets/${p.img}`} alt={p.alt} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+							<div data-bpwipe style="position:absolute;inset:0;background:#ffffff;isolation:isolate;clip-path:inset(0 0 0 0);transition:clip-path 1.2s cubic-bezier(.65,0,.35,1)">
+								<img src={`/assets/${p.img}`} alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.5) brightness(1.12);mix-blend-mode:multiply" />
+								<div style="position:absolute;inset:0;background:#D91E26;mix-blend-mode:lighten"></div>
+								<div style="position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.16) 0 1px,transparent 1px 26px),repeating-linear-gradient(90deg,rgba(255,255,255,.16) 0 1px,transparent 1px 26px)"></div>
+								<div style="position:absolute;left:10px;bottom:8px;font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:10px;letter-spacing:2px;color:#fff;background:rgba(0,0,0,.28);padding:3px 8px">DRG · {p.drg}</div>
+							</div>
+						</div>
+						<div style="padding:22px">
+							<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:19px;color:#141419">{p.title}</div>
+							<div style="font-size:14px;line-height:1.6;color:#666;margin-top:8px">{p.body}</div>
+							<div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:12.5px;color:#D91E26;letter-spacing:1.5px;margin-top:14px">READ MORE →</div>
+						</div>
+					</a>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<!-- WHY BFE -->
+	<div style="padding:clamp(40px,6vw,72px) clamp(16px,4vw,44px);background:#fff">
+		<div style="display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,56px);align-items:center;max-width:1440px;margin:0 auto">
+			<div data-reveal style="opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;flex:1;min-width:min(320px,100%)">
+				<img src="/assets/plant-installation.jpg" alt="Bell annealing furnaces commissioned at customer plant" style="width:100%;height:clamp(280px,32vw,420px);object-fit:cover;display:block;border:1px solid #ececec" />
+			</div>
+			<div style="flex:1;min-width:min(320px,100%)">
+				<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">WHY BELL FURNACE ENGINEERS</div>
+				<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);margin:8px 0 0;color:#141419;text-wrap:pretty">Everything in-house. From plate to plant.</h2>
+				<div style="display:flex;flex-direction:column;gap:18px;margin-top:26px">
+					{why.map(([n, t, b], i) => (
+						<div data-reveal data-delay={i * 80} style="opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s;display:flex;gap:16px">
+							<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;color:#D91E26;font-size:18px;flex:none">{n}</div>
+							<div><div style="font-weight:600;font-size:16px">{t}</div><div style="font-size:14px;color:#666;line-height:1.6;margin-top:2px">{b}</div></div>
+						</div>
+					))}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- INDUSTRIES -->
+	<div style="background:#D91E26;padding:clamp(32px,5vw,52px) clamp(16px,4vw,44px);position:relative;overflow:hidden">
+		<img src="/assets/bfe-logo.png" alt="" style="position:absolute;left:-30px;bottom:-80px;height:260px;opacity:.10;pointer-events:none" />
+		<div style="max-width:1440px;margin:0 auto;position:relative">
+			<div style="font-size:12.5px;letter-spacing:4px;color:rgba(255,255,255,.85);font-weight:600">INDUSTRIES WE SERVE</div>
+			<div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:18px">
+				{industries.map((ind) => (
+					<div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:clamp(13px,1.5vw,15px);letter-spacing:1.5px;color:#fff;border:1.5px solid rgba(255,255,255,.7);padding:10px 20px">{ind}</div>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<!-- PROCESS -->
+	<div style="padding:clamp(40px,6vw,72px) clamp(16px,4vw,44px);background:#fff">
+		<div style="max-width:1440px;margin:0 auto">
+			<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">HOW WE WORK</div>
+			<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);margin:8px 0 30px;color:#141419">Four steps to a running furnace</h2>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:22px">
+				{process.map(([n, t, b], i) => (
+					<div data-reveal data-delay={i * 80} style="opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;border-top:3px solid #D91E26;padding:20px 4px 0">
+						<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:30px;color:#D91E26">{n}</div>
+						<div style="font-weight:600;font-size:17px;margin-top:6px">{t}</div>
+						<div style="font-size:14px;color:#666;line-height:1.6;margin-top:6px">{b}</div>
+					</div>
+				))}
+			</div>
+		</div>
+	</div>
+
+	<!-- CTA -->
+	<div style="background:#0c0c0c;padding:clamp(36px,5vw,60px) clamp(16px,4vw,44px)">
+		<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:20px;max-width:1440px;margin:0 auto">
+			<div>
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(22px,3vw,32px);color:#fff">Planning a new annealing line?</div>
+				<div style="font-size:15px;color:#aaa;margin-top:6px">Send us your charge details — we'll respond with a proposal.</div>
+			</div>
+			<div style="display:flex;flex-wrap:wrap;gap:14px">
+				<a class="btn-red" href="/contact" style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;background:#D91E26;color:#fff;padding:15px 30px;letter-spacing:1.5px;cursor:pointer;text-decoration:none">GET A QUOTE</a>
+				<a class="btn-outline-white" href="https://wa.me/919810630056" style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;border:2px solid #fff;color:#fff;padding:13px 30px;letter-spacing:1.5px;cursor:pointer;text-decoration:none">WHATSAPP US</a>
+			</div>
+		</div>
+	</div>
 </BaseLayout>
-
-<style>
-	.hero,
-	.features,
-	.cta {
-		padding-block: var(--space-lg);
-	}
-
-	.features__grid {
-		display: grid;
-		gap: var(--space-md);
-		grid-template-columns: 1fr;
-	}
-
-	@media (min-width: 600px) {
-		.features__grid {
-			grid-template-columns: repeat(3, 1fr);
-		}
-	}
-
-	.btn {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		padding-inline: var(--space-md);
-		border-radius: 4px;
-		background: var(--color-accent);
-		color: white;
-		text-decoration: none;
-	}
-</style>

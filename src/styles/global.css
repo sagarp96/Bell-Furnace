@@ -1,32 +1,22 @@
-/* Design tokens */
+/* ============================================================
+   Bell Furnace Engineers — global styles
+   Ported from the design handoff (Chakra Petch + Saira, single
+   red accent). style-hover / style-focus attributes from the
+   design are reproduced here as real CSS.
+   ============================================================ */
+
 :root {
-	--color-bg: #ffffff;
-	--color-text: #1a1a1a;
-	--color-accent: #2b5cff;
-	--color-border: #e2e2e2;
+	--red: #d91e26;
+	--red-dark: #b01218;
+	--red-bright: #ff3b42;
+	--ink: #141419;
+	--black: #0c0c0c;
+	--paper: #f8f6f3;
+	--border: #ececec;
+}
 
-	--space-xs: 0.5rem;
-	--space-sm: 1rem;
-	--space-md: 1.5rem;
-	--space-lg: 2.5rem;
-	--space-xl: 4rem;
-
-	--font-body: system-ui, -apple-system, "Segoe UI", sans-serif;
-	--font-size-base: 1rem;
-	--font-size-lg: 1.25rem;
-	--font-size-xl: 2rem;
-	--font-size-2xl: 3rem;
-
-	/* Reference values only — breakpoints below use literal px per-media-query,
-	   since CSS does not support custom properties inside @media conditions. */
-	--breakpoint-tablet: 600px;
-	--breakpoint-laptop: 1024px;
-
-	--tap-target-min: 44px;
-
-	--motion-fast: 150ms;
-	--motion-base: 250ms;
-	--motion-ease: ease-out;
+html {
+	scroll-behavior: smooth;
 }
 
 *,
@@ -37,47 +27,121 @@
 
 body {
 	margin: 0;
-	font-family: var(--font-body);
-	font-size: var(--font-size-base);
-	color: var(--color-text);
-	background: var(--color-bg);
+	background: #ffffff;
+	font-family: "Saira", sans-serif;
+	color: var(--ink);
+	-webkit-font-smoothing: antialiased;
 	line-height: 1.5;
 }
 
-main {
-	padding: var(--space-md);
+input,
+textarea {
+	font-family: "Saira", sans-serif;
 }
 
-/* Hover/entrance micro-interactions — plain CSS only, no GSAP.
-   Scroll-driven/parallax/transition animation is GSAP's domain (see U4). */
-a,
-button,
-.btn {
-	transition:
-		color var(--motion-fast) var(--motion-ease),
-		background-color var(--motion-fast) var(--motion-ease),
-		border-color var(--motion-fast) var(--motion-ease),
-		transform var(--motion-fast) var(--motion-ease);
+input::placeholder,
+textarea::placeholder {
+	color: #9a9a9a;
 }
 
-button,
-.btn {
-	min-height: var(--tap-target-min);
-	min-width: var(--tap-target-min);
-}
-
-/* Keyboard-visible focus affordance, using the same tokens as hover states */
+/* Keyboard focus affordance for interactive elements */
 a:focus-visible,
 button:focus-visible,
-.btn:focus-visible,
-input:focus-visible {
-	outline: 2px solid var(--color-accent);
+input:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+	outline: 2px solid var(--red);
 	outline-offset: 2px;
 }
 
-/* Visually hidden but not display:none — keeps content in the accessibility
-   tree removed while remaining in the DOM (used for the contact form's
-   honeypot field, in combination with aria-hidden on the wrapper). */
+/* ---------- interaction states (were style-hover in the design) ---------- */
+
+.nav-link {
+	transition: background 0.15s ease;
+}
+.nav-link:hover {
+	background: rgba(0, 0, 0, 0.18);
+}
+
+.nav-quote {
+	transition: background 0.15s ease;
+}
+.nav-quote:hover {
+	background: #2a2a2a;
+}
+
+.btn-red {
+	transition: background 0.15s ease;
+}
+.btn-red:hover {
+	background: var(--red-dark);
+}
+
+.btn-outline-dark {
+	transition:
+		background 0.15s ease,
+		color 0.15s ease;
+}
+.btn-outline-dark:hover {
+	background: var(--ink);
+	color: #fff;
+}
+
+.btn-outline-white {
+	transition:
+		background 0.15s ease,
+		color 0.15s ease;
+}
+.btn-outline-white:hover {
+	background: #fff;
+	color: var(--black);
+}
+
+.link-red {
+	transition: color 0.15s ease;
+}
+.link-red:hover {
+	color: var(--red-dark);
+}
+
+.product-card {
+	transition: box-shadow 0.2s ease;
+}
+.product-card:hover {
+	box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+}
+
+.contact-card {
+	transition: border-color 0.15s ease;
+}
+.contact-card:hover {
+	border-color: var(--red);
+}
+
+.footer-link {
+	transition: color 0.15s ease;
+	cursor: pointer;
+}
+.footer-link:hover {
+	color: #fff;
+}
+
+.fab {
+	transition: transform 0.2s ease;
+}
+.fab:hover {
+	transform: scale(1.08);
+}
+
+.q-input {
+	transition: border-color 0.15s ease;
+}
+.q-input:focus {
+	border-color: var(--red);
+}
+
+/* Visually hidden but present in the DOM and accessibility tree control —
+   used by the contact form honeypot (paired with aria-hidden on the wrapper). */
 .visually-hidden {
 	position: absolute;
 	width: 1px;
@@ -90,21 +154,7 @@ input:focus-visible {
 	border: 0;
 }
 
-/* Responsive breakpoints (mobile-first; tablet/laptop are min-width overrides) */
-@media (min-width: 600px) {
-	main {
-		padding: var(--space-lg);
-	}
-}
-
-@media (min-width: 1024px) {
-	main {
-		padding: var(--space-xl);
-	}
-}
-
-/* CSS-level motion-safety net, underneath the GSAP-level gsap.matchMedia()
-   gating added in U4 — belt-and-suspenders for any CSS-only transitions above. */
+/* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,

@@ -3,9 +3,45 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactForm from "../components/ContactForm";
 ---
 
-<BaseLayout title="Contact — Bell Furnace" description="Get in touch with Bell Furnace.">
-	<main>
-		<h1>Contact</h1>
-		<ContactForm client:visible />
-	</main>
+<BaseLayout
+	title="Contact — Bell Furnace Engineers"
+	description="Tell us about your charge — we'll design the furnace. Call, WhatsApp or email Bell Furnace Engineers, New Delhi."
+>
+	<!-- HERO BANNER -->
+	<div style="background:#D91E26;padding:clamp(36px,5vw,64px) clamp(16px,4vw,44px);position:relative;overflow:hidden">
+		<img src="/assets/bfe-logo.png" alt="" style="position:absolute;right:-40px;top:-60px;height:300px;opacity:.12;pointer-events:none" />
+		<div style="max-width:1440px;margin:0 auto;position:relative">
+			<div style="font-size:12.5px;letter-spacing:4px;color:rgba(255,255,255,.85);font-weight:600">CONTACT</div>
+			<h1 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(30px,4.5vw,50px);color:#fff;margin:10px 0 0;text-wrap:pretty">Tell us about your charge. We'll design the furnace.</h1>
+		</div>
+	</div>
+
+	<div style="max-width:1440px;margin:0 auto;padding:clamp(36px,5vw,64px) clamp(16px,4vw,44px);display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,56px)">
+		<!-- CONTACT DETAILS -->
+		<div style="flex:1;min-width:min(300px,100%);display:flex;flex-direction:column;gap:18px">
+			<a class="contact-card" href="tel:+919810630056" style="text-decoration:none;color:inherit;border:1px solid #ececec;padding:22px;display:block">
+				<div style="font-size:11.5px;letter-spacing:2.5px;color:#D91E26;font-weight:600">CALL / WHATSAPP</div>
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:21px;margin-top:6px">+91 98106 30056</div>
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:21px">+91 97735 68856</div>
+			</a>
+			<a class="contact-card" href="mailto:bellfurnaces@gmail.com" style="text-decoration:none;color:inherit;border:1px solid #ececec;padding:22px;display:block">
+				<div style="font-size:11.5px;letter-spacing:2.5px;color:#D91E26;font-weight:600">EMAIL</div>
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px;margin-top:6px">bellfurnaces@gmail.com</div>
+				<div style="font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:17px">theindustrialengineers@gmail.com</div>
+			</a>
+			<div style="border:1px solid #ececec;padding:22px">
+				<div style="font-size:11.5px;letter-spacing:2.5px;color:#D91E26;font-weight:600">REGISTERED OFFICE</div>
+				<div style="font-size:15px;line-height:1.7;color:#444;margin-top:6px">89 Third Floor, D1 Block, Lal Sai Marg,<br />Janakpuri, New Delhi — 110058</div>
+			</div>
+			<div style="border:1px solid #ececec;padding:22px">
+				<div style="font-size:11.5px;letter-spacing:2.5px;color:#D91E26;font-weight:600">WORKS</div>
+				<div style="font-size:15px;line-height:1.7;color:#444;margin-top:6px">Khasra No. 56/6, Mundka Industrial Area,<br />New Delhi — 110041</div>
+			</div>
+		</div>
+
+		<!-- QUOTE FORM -->
+		<div style="flex:1.2;min-width:min(320px,100%)">
+			<ContactForm client:load />
+		</div>
+	</div>
 </BaseLayout>

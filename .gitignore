@@ -28,3 +28,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Design handoff source (not part of the site build)
+/Bellfurnace Website Design-handoff.zip
+/bellfurnace-website-design/

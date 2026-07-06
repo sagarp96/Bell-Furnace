@@ -1,89 +1,95 @@
 ---
-const navItems = [
-	{ href: "/", label: "Home" },
-	{ href: "/about", label: "About" },
-	{ href: "/contact", label: "Contact" },
+const nav = [
+	{ href: "/", label: "HOME" },
+	{ href: "/about", label: "ABOUT US" },
+	{ href: "/products", label: "PRODUCTS" },
+	{ href: "/contact", label: "CONTACT" },
 ];
 ---
 
-<header class="site-header">
-	<a class="site-header__brand" href="/">Bell Furnace</a>
+<div style="position:sticky;top:0;z-index:60;background:#ffffff;box-shadow:0 1px 0 #ececec">
+	<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px clamp(16px,4vw,44px);max-width:1440px;margin:0 auto">
+		<a href="/" style="display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none">
+			<img src="/assets/bfe-logo.png" alt="BFE shield logo" style="height:clamp(40px,5vw,54px);width:auto" />
+			<div>
+				<div style="font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:clamp(17px,2.2vw,24px);line-height:1;color:#D91E26;letter-spacing:.5px">BELL FURNACE ENGINEERS</div>
+				<div style="font-size:clamp(9px,1.1vw,11px);letter-spacing:3px;color:#6b6b6b;margin-top:3px">THE BELL STANDARD IN INDUSTRIAL HEATING</div>
+			</div>
+		</a>
 
-	<!-- Mobile nav: <details>/<summary> disclosure, zero JS, keyboard/screen-reader
-	     operable by default. This is the plan's one deliberate exception to
-	     "all interactivity is a React island" — a native HTML element needs none. -->
-	<details class="site-header__mobile-nav">
-		<summary aria-label="Toggle navigation">Menu</summary>
-		<ul class="site-header__nav-list">
-			{navItems.map((item) => (
-				<li><a href={item.href}>{item.label}</a></li>
-			))}
-		</ul>
-	</details>
+		<div class="header-contact" style="align-items:center;gap:26px">
+			<a href="tel:+919810630056" style="display:flex;flex-direction:column;align-items:flex-end;text-decoration:none;color:#333">
+				<span style="font-size:10.5px;color:#999;letter-spacing:1.5px">CALL / WHATSAPP</span>
+				<span style="font-weight:600;font-size:14px">+91 98106 30056</span>
+			</a>
+			<a href="mailto:bellfurnaces@gmail.com" style="display:flex;flex-direction:column;align-items:flex-end;text-decoration:none;color:#333">
+				<span style="font-size:10.5px;color:#999;letter-spacing:1.5px">EMAIL</span>
+				<span style="font-weight:600;font-size:14px">bellfurnaces@gmail.com</span>
+			</a>
+		</div>
 
-	<nav class="site-header__desktop-nav" aria-label="Primary">
-		<ul class="site-header__nav-list">
-			{navItems.map((item) => (
-				<li><a href={item.href}>{item.label}</a></li>
+		<div
+			class="header-burger"
+			data-menu-toggle
+			role="button"
+			tabindex="0"
+			aria-label="Toggle navigation"
+			aria-expanded="false"
+			style="width:44px;height:44px;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;border:1.5px solid #D91E26"
+		>
+			<div style="width:20px;height:2px;background:#D91E26"></div>
+			<div style="width:20px;height:2px;background:#D91E26"></div>
+			<div style="width:20px;height:2px;background:#D91E26"></div>
+		</div>
+	</div>
+
+	<!-- desktop red nav -->
+	<div class="red-nav" style="background:#D91E26">
+		<div style="display:flex;align-items:center;gap:8px;padding:0 clamp(16px,4vw,44px);max-width:1440px;margin:0 auto;font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:13.5px;letter-spacing:2px;color:#fff">
+			{nav.map((n) => (
+				<a class="nav-link" href={n.href} style="padding:13px 16px;cursor:pointer;color:#fff;text-decoration:none">{n.label}</a>
 			))}
-		</ul>
-	</nav>
-</header>
+			<div style="flex:1"></div>
+			<a class="nav-quote" href="/contact" style="padding:13px 22px;cursor:pointer;background:#0c0c0c;color:#fff;text-decoration:none">GET QUOTE →</a>
+		</div>
+	</div>
+
+	<!-- mobile menu -->
+	<div class="mobile-menu" data-menu style="flex-direction:column;background:#D91E26;font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:15px;letter-spacing:2px;color:#fff">
+		{nav.map((n) => (
+			<a href={n.href} style="padding:15px 24px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.18);color:#fff;text-decoration:none">{n.label}</a>
+		))}
+		<a href="/contact" style="padding:15px 24px;cursor:pointer;background:#0c0c0c;color:#fff;text-decoration:none">GET QUOTE →</a>
+	</div>
+</div>
 
 <style>
-	.site-header {
+	.header-contact {
 		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: var(--space-sm) var(--space-md);
-		border-bottom: 1px solid var(--color-border);
 	}
-
-	.site-header__brand {
-		font-weight: 700;
-		font-size: var(--font-size-lg);
-	}
-
-	.site-header__nav-list {
-		list-style: none;
-		display: flex;
-		gap: var(--space-md);
-		margin: 0;
-		padding: 0;
-	}
-
-	.site-header__desktop-nav {
+	.header-burger {
 		display: none;
 	}
-
-	.site-header__mobile-nav summary {
-		cursor: pointer;
-		min-height: var(--tap-target-min);
-		display: flex;
-		align-items: center;
-		list-style: none;
+	.red-nav {
+		display: block;
 	}
-
-	.site-header__mobile-nav summary::-webkit-details-marker {
+	.mobile-menu {
 		display: none;
 	}
-
-	.site-header__mobile-nav[open] .site-header__nav-list {
-		flex-direction: column;
-		position: absolute;
-		background: var(--color-bg);
-		border: 1px solid var(--color-border);
-		padding: var(--space-sm);
-		right: var(--space-md);
-	}
-
-	@media (min-width: 600px) {
-		.site-header__mobile-nav {
+	@media (max-width: 860px) {
+		.header-contact {
 			display: none;
 		}
-
-		.site-header__desktop-nav {
-			display: block;
+		.header-burger {
+			display: flex;
+		}
+		.red-nav {
+			display: none;
+		}
+	}
+	@media (min-width: 861px) {
+		.mobile-menu {
+			display: none !important;
 		}
 	}
 </style>
