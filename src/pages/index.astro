@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import ScrollReveal from "../components/animated/ScrollReveal";
 ---
 
 <BaseLayout title="Bell Furnace" description="Placeholder home page — content pending the design file.">
@@ -13,9 +14,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 		<section class="features">
 			<h2>What we do</h2>
 			<div class="features__grid">
-				<article><h3>Placeholder feature one</h3><p>Placeholder description.</p></article>
-				<article><h3>Placeholder feature two</h3><p>Placeholder description.</p></article>
-				<article><h3>Placeholder feature three</h3><p>Placeholder description.</p></article>
+				<ScrollReveal client:visible>
+					<article><h3>Placeholder feature one</h3><p>Placeholder description.</p></article>
+				</ScrollReveal>
+				<ScrollReveal client:visible>
+					<article><h3>Placeholder feature two</h3><p>Placeholder description.</p></article>
+				</ScrollReveal>
+				<ScrollReveal client:visible>
+					<article><h3>Placeholder feature three</h3><p>Placeholder description.</p></article>
+				</ScrollReveal>
 			</div>
 		</section>
 
