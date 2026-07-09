@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FurnaceScene from "../components/FurnaceScene.astro";
 
 const products = [
 	{ img: "bell-annealing-furnace-loading.jpg", drg: "BFE-01", title: "Bell Type Annealing Furnace", body: "Flagship batch annealing systems for wire coils & strip — uniform results, charge after charge.", alt: "Bell type annealing furnace being loaded over wire coils" },
@@ -47,116 +48,10 @@ const process = [
 				</div>
 			</div>
 
-			<!-- BLUEPRINT -->
+			<!-- 3D ANNEALING CYCLE -->
 			<div style="flex:.95;min-width:min(320px,100%);display:flex;flex-direction:column;gap:8px">
-				<svg id="bp-svg" viewBox="0 0 680 700" style="width:100%;height:auto;display:block" aria-label="Animated cutaway blueprint of a bell type annealing furnace">
-					<defs>
-						<pattern id="bp-grid" width="34" height="34" patternUnits="userSpaceOnUse">
-							<path d="M34 0H0V34" fill="none" stroke="rgba(217,30,38,.09)" stroke-width="1"></path>
-						</pattern>
-					</defs>
-					<rect x="1" y="1" width="678" height="698" fill="url(#bp-grid)" stroke="#D91E26" stroke-width="2"></rect>
-					<rect x="9" y="9" width="662" height="682" fill="none" stroke="rgba(217,30,38,.35)" stroke-width="1"></rect>
-
-					<g class="bp-label" style="opacity:0">
-						<line x1="140" y1="70" x2="500" y2="70" stroke="#D91E26" stroke-width="1"></line>
-						<path d="M140 70l10 -4v8z M500 70l-10 -4v8z" fill="#D91E26"></path>
-						<line x1="140" y1="62" x2="140" y2="150" stroke="rgba(217,30,38,.5)" stroke-width="1" stroke-dasharray="4 4"></line>
-						<line x1="500" y1="62" x2="500" y2="150" stroke="rgba(217,30,38,.5)" stroke-width="1" stroke-dasharray="4 4"></line>
-						<text x="320" y="58" text-anchor="middle" font-family="Chakra Petch,sans-serif" font-size="14" font-weight="600" fill="#D91E26" letter-spacing="2">Ø XXXX*</text>
-					</g>
-
-					<g id="bp-hood">
-						<path class="bp-draw" d="M140 560 V210 Q140 120 230 120 H410 Q500 120 500 210 V560" fill="none" stroke="#D91E26" stroke-width="3"></path>
-						<line x1="128" y1="560" x2="512" y2="560" stroke="#D91E26" stroke-width="3"></line>
-						<line x1="140" y1="260" x2="500" y2="260" stroke="rgba(217,30,38,.45)" stroke-width="1.5"></line>
-						<line x1="140" y1="360" x2="500" y2="360" stroke="rgba(217,30,38,.45)" stroke-width="1.5"></line>
-						<line x1="140" y1="460" x2="500" y2="460" stroke="rgba(217,30,38,.45)" stroke-width="1.5"></line>
-						<path class="bp-draw" d="M305 120 v-26 h30 v26" fill="none" stroke="#D91E26" stroke-width="2.5"></path>
-						<path class="bp-draw" d="M158 240 l14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12" fill="none" stroke="#D91E26" stroke-width="1.6"></path>
-						<path class="bp-draw" d="M522 240 l-14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12 -14 12 14 12" fill="none" stroke="#D91E26" stroke-width="1.6" transform="translate(-36 0)"></path>
-					</g>
-
-					<g>
-						<path class="bp-draw" d="M175 560 V235 Q175 175 245 175 H395 Q465 175 465 235 V560" fill="none" stroke="#D91E26" stroke-width="2" stroke-dasharray="9 6"></path>
-						<g stroke="rgba(217,30,38,.55)" stroke-width="1">
-							<line x1="169" y1="270" x2="181" y2="270"></line><line x1="169" y1="300" x2="181" y2="300"></line><line x1="169" y1="330" x2="181" y2="330"></line><line x1="169" y1="360" x2="181" y2="360"></line><line x1="169" y1="390" x2="181" y2="390"></line><line x1="169" y1="420" x2="181" y2="420"></line><line x1="169" y1="450" x2="181" y2="450"></line><line x1="169" y1="480" x2="181" y2="480"></line><line x1="169" y1="510" x2="181" y2="510"></line>
-							<line x1="459" y1="270" x2="471" y2="270"></line><line x1="459" y1="300" x2="471" y2="300"></line><line x1="459" y1="330" x2="471" y2="330"></line><line x1="459" y1="360" x2="471" y2="360"></line><line x1="459" y1="390" x2="471" y2="390"></line><line x1="459" y1="420" x2="471" y2="420"></line><line x1="459" y1="450" x2="471" y2="450"></line><line x1="459" y1="480" x2="471" y2="480"></line><line x1="459" y1="510" x2="471" y2="510"></line>
-						</g>
-					</g>
-
-					<g id="bp-heat">
-						<path class="bp-wave" d="M240 320 q8 -14 0 -28 q-8 -14 0 -28 q8 -14 0 -28" fill="none" stroke="#D91E26" stroke-width="2" style="opacity:0"></path>
-						<path class="bp-wave" d="M320 330 q8 -14 0 -28 q-8 -14 0 -28 q8 -14 0 -28" fill="none" stroke="#D91E26" stroke-width="2" style="opacity:0"></path>
-						<path class="bp-wave" d="M400 320 q8 -14 0 -28 q-8 -14 0 -28 q8 -14 0 -28" fill="none" stroke="#D91E26" stroke-width="2" style="opacity:0"></path>
-					</g>
-
-					<g>
-						<g class="bp-draw-g">
-							<rect x="215" y="350" width="210" height="62" fill="none" stroke="#D91E26" stroke-width="2"></rect>
-							<line x1="215" y1="362" x2="425" y2="362" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="374" x2="425" y2="374" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="386" x2="425" y2="386" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="398" x2="425" y2="398" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
-						</g>
-						<g class="bp-draw-g">
-							<rect x="215" y="418" width="210" height="62" fill="none" stroke="#D91E26" stroke-width="2"></rect>
-							<line x1="215" y1="430" x2="425" y2="430" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="442" x2="425" y2="442" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="454" x2="425" y2="454" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="466" x2="425" y2="466" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
-						</g>
-						<g class="bp-draw-g">
-							<rect x="215" y="486" width="210" height="62" fill="none" stroke="#D91E26" stroke-width="2"></rect>
-							<line x1="215" y1="498" x2="425" y2="498" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="510" x2="425" y2="510" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="522" x2="425" y2="522" stroke="rgba(217,30,38,.4)" stroke-width="1"></line><line x1="215" y1="534" x2="425" y2="534" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
-						</g>
-					</g>
-
-					<g>
-						<rect class="bp-draw" x="150" y="566" width="340" height="20" fill="none" stroke="#D91E26" stroke-width="2.5"></rect>
-						<line x1="150" y1="576" x2="490" y2="576" stroke="rgba(217,30,38,.4)" stroke-width="1"></line>
-						<rect x="176" y="586" width="16" height="66" fill="none" stroke="#D91E26" stroke-width="2"></rect>
-						<rect x="448" y="586" width="16" height="66" fill="none" stroke="#D91E26" stroke-width="2"></rect>
-						<line x1="150" y1="656" x2="490" y2="656" stroke="#D91E26" stroke-width="2.5"></line>
-					</g>
-
-					<g id="bp-impeller">
-						<circle cx="320" cy="620" r="30" fill="none" stroke="#D91E26" stroke-width="2"></circle>
-						<circle cx="320" cy="620" r="5" fill="#D91E26"></circle>
-						<path d="M320 620 L320 592 M320 620 L344 606 M320 620 L344 634 M320 620 L320 648 M320 620 L296 634 M320 620 L296 606" stroke="#D91E26" stroke-width="2.5" fill="none"></path>
-					</g>
-
-					<g font-family="Chakra Petch,sans-serif" font-size="12" font-weight="600" fill="#D91E26">
-						<g class="bp-label" style="opacity:0">
-							<line x1="500" y1="200" x2="586" y2="182" stroke="#D91E26" stroke-width="1"></line><circle cx="500" cy="200" r="3" fill="#D91E26"></circle>
-							<text x="590" y="180" letter-spacing="1">HEATING</text><text x="590" y="194" letter-spacing="1">HOOD</text>
-						</g>
-						<g class="bp-label" style="opacity:0">
-							<line x1="465" y1="320" x2="586" y2="308" stroke="#D91E26" stroke-width="1"></line><circle cx="465" cy="320" r="3" fill="#D91E26"></circle>
-							<text x="590" y="304" letter-spacing="1">INNER COVER</text><text x="590" y="318" letter-spacing="1">· RETORT</text>
-						</g>
-						<g class="bp-label" style="opacity:0">
-							<line x1="425" y1="450" x2="586" y2="446" stroke="#D91E26" stroke-width="1"></line><circle cx="425" cy="450" r="3" fill="#D91E26"></circle>
-							<text x="590" y="442" letter-spacing="1">WIRE ROD</text><text x="590" y="456" letter-spacing="1">COILS</text>
-						</g>
-						<g class="bp-label" style="opacity:0">
-							<line x1="172" y1="290" x2="92" y2="272" stroke="#D91E26" stroke-width="1"></line><circle cx="172" cy="290" r="3" fill="#D91E26"></circle>
-							<text x="88" y="258" text-anchor="end" letter-spacing="1">HEATING</text><text x="88" y="272" text-anchor="end" letter-spacing="1">ELEMENTS</text>
-						</g>
-						<g class="bp-label" style="opacity:0">
-							<line x1="150" y1="576" x2="92" y2="576" stroke="#D91E26" stroke-width="1"></line><circle cx="150" cy="576" r="3" fill="#D91E26"></circle>
-							<text x="88" y="566" text-anchor="end" letter-spacing="1">BASE</text><text x="88" y="580" text-anchor="end" letter-spacing="1">ASSEMBLY</text>
-						</g>
-						<g class="bp-label" style="opacity:0">
-							<line x1="352" y1="628" x2="586" y2="628" stroke="#D91E26" stroke-width="1"></line><circle cx="352" cy="628" r="3" fill="#D91E26"></circle>
-							<text x="590" y="624" letter-spacing="1">HIGH-VELOCITY</text><text x="590" y="638" letter-spacing="1">IMPELLER</text>
-						</g>
-					</g>
-
-					<g class="bp-label" style="opacity:0" font-family="Chakra Petch,sans-serif" fill="#D91E26">
-						<rect x="20" y="636" width="252" height="52" fill="#ffffff" stroke="#D91E26" stroke-width="1.5"></rect>
-						<line x1="20" y1="653" x2="272" y2="653" stroke="#D91E26" stroke-width="1"></line>
-						<line x1="20" y1="670" x2="272" y2="670" stroke="#D91E26" stroke-width="1"></line>
-						<text x="28" y="649" font-size="10" font-weight="600" letter-spacing="1.5">BELL FURNACE ENGINEERS · NEW DELHI</text>
-						<text x="28" y="666" font-size="9.5" letter-spacing="1.5">DRG NO. BFE-BAF-01 · BELL TYPE ANNEALING FURNACE</text>
-						<text x="28" y="683" font-size="9.5" letter-spacing="1.5">SCALE 1:25 · REV A · SHEET 01 OF 01</text>
-					</g>
-				</svg>
-				<div style="font-size:11.5px;color:#9a9a9a;letter-spacing:.5px">*Indicative section — dimensions customised to each charge weight &amp; coil size.</div>
+				<FurnaceScene />
+				<div style="font-size:11.5px;color:#9a9a9a;letter-spacing:.5px">*Indicative cycle — furnace customised to each charge weight &amp; coil size.</div>
 			</div>
 		</div>
 	</div>

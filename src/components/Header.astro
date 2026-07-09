@@ -10,10 +10,10 @@ const nav = [
 <div style="position:sticky;top:0;z-index:60;background:#ffffff;box-shadow:0 1px 0 #ececec">
 	<div style="display:flex;justify-content:space-between;align-items:center;gap:16px;padding:10px clamp(16px,4vw,44px);max-width:1440px;margin:0 auto">
 		<a href="/" style="display:flex;align-items:center;gap:12px;cursor:pointer;text-decoration:none">
-			<img src="/assets/bfe-logo.png" alt="BFE shield logo" style="height:clamp(40px,5vw,54px);width:auto" />
+			<img src="/assets/bfe-logo.png" alt="BFE shield logo" style="height:clamp(50px,6.5vw,68px);width:auto" />
 			<div>
-				<div style="font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:clamp(17px,2.2vw,24px);line-height:1;color:#D91E26;letter-spacing:.5px">BELL FURNACE ENGINEERS</div>
-				<div style="font-size:clamp(9px,1.1vw,11px);letter-spacing:3px;color:#6b6b6b;margin-top:3px">THE BELL STANDARD IN INDUSTRIAL HEATING</div>
+				<div style="font-family:'Chakra Petch',sans-serif;font-style:italic;font-weight:700;font-size:clamp(20px,2.8vw,29px);line-height:1;color:#D91E26;letter-spacing:.5px">BELL FURNACE ENGINEERS</div>
+				<div style="font-size:clamp(9.5px,1.2vw,12px);letter-spacing:3px;color:#6b6b6b;margin-top:4px">BUILT FOR CONSISTENT RESULTS</div>
 			</div>
 		</a>
 
@@ -44,13 +44,13 @@ const nav = [
 	</div>
 
 	<!-- desktop red nav -->
-	<div class="red-nav" style="background:#D91E26">
+	<div class="red-nav" style="background:#D91E26;margin-top:8px">
 		<div style="display:flex;align-items:center;gap:8px;padding:0 clamp(16px,4vw,44px);max-width:1440px;margin:0 auto;font-family:'Chakra Petch',sans-serif;font-weight:600;font-size:13.5px;letter-spacing:2px;color:#fff">
 			{nav.map((n) => (
-				<a class="nav-link" href={n.href} style="padding:13px 16px;cursor:pointer;color:#fff;text-decoration:none">{n.label}</a>
+				<a class="nav-link" href={n.href} style="padding:16px;cursor:pointer;color:#fff;text-decoration:none">{n.label}</a>
 			))}
 			<div style="flex:1"></div>
-			<a class="nav-quote" href="/contact" style="padding:13px 22px;cursor:pointer;background:#0c0c0c;color:#fff;text-decoration:none">GET QUOTE →</a>
+			<a class="nav-quote" href="/contact" style="padding:16px 22px;cursor:pointer;background:#0c0c0c;color:#fff;text-decoration:none">GET QUOTE →</a>
 		</div>
 	</div>
 
