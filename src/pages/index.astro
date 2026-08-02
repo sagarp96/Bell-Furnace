@@ -1,30 +1,102 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
 import FurnaceScene from "../components/FurnaceScene.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const products = [
-	{ img: "bell-annealing-furnace-loading.jpg", drg: "BFE-01", title: "Bell Type Annealing Furnace", body: "Flagship batch annealing systems for wire coils & strip — uniform results, charge after charge.", alt: "Bell type annealing furnace being loaded over wire coils" },
-	{ img: "retort-lifting.jpg", drg: "BFE-02", title: "Retorts / Inner Covers", body: "Corrugated heat-resistant inner covers for gas-tight, controlled-atmosphere annealing.", alt: "Corrugated retort being lifted by crane" },
-	{ img: "impeller-twin.jpg", drg: "BFE-03", title: "Impellers & Diffusers", body: "Cast & fabricated circulation fans, dynamically balanced for high-velocity uniform heating.", alt: "Fabricated high-velocity impeller" },
-	{ img: "heating-hood.jpg", drg: "BFE-04", title: "Heating Hoods", body: "Insulated electric / gas-fired hoods engineered for low heat loss and long element life.", alt: "Insulated heating hood with wiring panels" },
-	{ img: "base-assembly-dispatch.jpg", drg: "BFE-05", title: "Base Assemblies", body: "Complete furnace bases with drive, sealing and diffuser systems, ready for installation.", alt: "Furnace base assembly loaded for dispatch" },
-	{ img: "charge-baskets.jpg", drg: "BFE-06", title: "Charge Carriers", body: "Baskets, convector plates and lifting tackle built to survive repeated thermal cycling.", alt: "Perforated charge carrier baskets" },
+	{
+		img: "bell-annealing-furnace-loading.jpg",
+		drg: "BFE-01",
+		title: "Bell Type Annealing Furnace",
+		body: "Flagship batch annealing systems for wire coils & strip — uniform results, charge after charge.",
+		alt: "Bell type annealing furnace being loaded over wire coils",
+	},
+	{
+		img: "retort-lifting.jpg",
+		drg: "BFE-02",
+		title: "Retorts / Inner Covers",
+		body: "Corrugated heat-resistant inner covers for gas-tight, controlled-atmosphere annealing.",
+		alt: "Corrugated retort being lifted by crane",
+	},
+	{
+		img: "impeller-dynamic-balancing.jpg",
+		drg: "BFE-03",
+		title: "Impellers & Diffusers",
+		body: "Cast & fabricated circulation fans, dynamically balanced for high-velocity uniform heating.",
+		alt: "Fabricated high-velocity impeller",
+	},
+	{
+		img: "heating-hood.jpg",
+		drg: "BFE-04",
+		title: "Heating Hoods",
+		body: "Insulated electric / gas-fired hoods engineered for low heat loss and long element life.",
+		alt: "Insulated heating hood with wiring panels",
+	},
+	{
+		img: "base-assembly-dispatch.jpg",
+		drg: "BFE-05",
+		title: "Base Assemblies",
+		body: "Complete furnace bases with drive, sealing and diffuser systems, ready for installation.",
+		alt: "Furnace base assembly loaded for dispatch",
+	},
+	{
+		img: "charge-baskets.jpg",
+		drg: "BFE-06",
+		title: "Charge Carriers",
+		body: "Baskets, convector plates and lifting tackle built to survive repeated thermal cycling.",
+		alt: "Perforated charge carrier baskets",
+	},
 ];
 
 const why = [
-	["01", "Design to commissioning, one partner", "Thermal design, fabrication, erection and commissioning — accountable end to end."],
-	["02", "Precision-balanced rotating parts", "Every impeller is dynamically balanced in-house for vibration-free, uniform circulation."],
-	["03", "A 39-year furnace lineage", "Built on the experience of Industrial Engineers (est. 1987) — hundreds of heat-processing installations across India."],
-	["04", "Ferrous & non-ferrous expertise", "Bright annealing of steel wire, copper, aluminium strip and more — with controlled atmosphere."],
+	[
+		"01",
+		"Custom capacities on demand",
+		"6T/7.5T/10.5T/15T/18T/30T and Spare parts",
+	],
+	[
+		"02",
+		"Methanol/Vacuum based",
+		"Decarb control through unique Hydro-carbon liquid purging/Vacuumization systems.",
+	],
+
+	["03", "Automated Workflow", "Complete Auto Operation through PLC and SCADA"],
+	[
+		"04",
+		"A 39-year furnace lineage",
+		"Built on the experience of Industrial Engineers (est. 1987) — hundreds of heat-processing installations across India",
+	],
 ];
 
-const industries = ["WIRE & CABLE", "STRIP & SHEET", "AUTOMOTIVE", "AEROSPACE", "STEEL & STAINLESS", "COPPER & ALUMINIUM"];
+const industries = [
+	"WIRE & CABLE",
+	"STRIP & SHEET",
+	"AUTOMOTIVE",
+	"BEARING INDUSTRY",
+	"FASTENR INDUSTRY",
+	"COPPER & ALUMINIUM",
+];
 
 const process = [
-	["01", "Requirement & Thermal Design", "Charge weight, material, cycle and atmosphere — engineered into a custom furnace design."],
-	["02", "In-house Manufacture", "Hoods, retorts, bases, impellers and carriers fabricated at our Mundka works, New Delhi."],
-	["03", "Erection & Commissioning", "Site installation, trials and handover with proven cycle results at your plant."],
-	["04", "Spares & Lifetime Support", "Retorts, impellers, elements and carriers as spares — plus retrofits for older furnaces."],
+	[
+		"01",
+		"Requirement & Thermal Design",
+		"Charge weight, material, cycle and atmosphere — engineered into a custom furnace design.",
+	],
+	[
+		"02",
+		"In-house Manufacture",
+		"Hoods, retorts, bases, impellers and carriers fabricated at our Mundka works, New Delhi.",
+	],
+	[
+		"03",
+		"Erection & Commissioning",
+		"Site installation, trials and handover with proven cycle results at your plant.",
+	],
+	[
+		"04",
+		"Spares & Lifetime Support",
+		"Retorts, impellers, elements and carriers as spares — plus retrofits for older furnaces.",
+	],
 ];
 ---
 
@@ -92,7 +164,7 @@ const process = [
 			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:22px">
 				{products.map((p, i) => (
 					<a class="product-card" href="/products" data-reveal data-delay={(i % 3) * 80} style="opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;background:#fff;border:1px solid #ececec;cursor:pointer;text-decoration:none;color:inherit;display:block">
-						<div style="position:relative;height:210px;overflow:hidden">
+						<div style="position:relative;aspect-ratio:3/4;overflow:hidden">
 							<img src={`/assets/${p.img}`} alt={p.alt} style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
 							<div data-bpwipe style="position:absolute;inset:0;background:#ffffff;isolation:isolate;clip-path:inset(0 0 0 0);transition:clip-path 1.2s cubic-bezier(.65,0,.35,1)">
 								<img src={`/assets/${p.img}`} alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.5) brightness(1.12);mix-blend-mode:multiply" />
@@ -120,7 +192,7 @@ const process = [
 			</div>
 			<div style="flex:1;min-width:min(320px,100%)">
 				<div style="font-size:12.5px;letter-spacing:4px;color:#D91E26;font-weight:600">WHY BELL FURNACE ENGINEERS</div>
-				<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);margin:8px 0 0;color:#141419;text-wrap:pretty">Everything in-house. From plate to plant.</h2>
+				<h2 style="font-family:'Chakra Petch',sans-serif;font-weight:700;font-size:clamp(26px,3.6vw,40px);margin:8px 0 0;color:#141419;text-wrap:pretty">FEATURES THAT STANDS US OUT</h2>
 				<div style="display:flex;flex-direction:column;gap:18px;margin-top:26px">
 					{why.map(([n, t, b], i) => (
 						<div data-reveal data-delay={i * 80} style="opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s;display:flex;gap:16px">
